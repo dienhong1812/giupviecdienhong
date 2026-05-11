@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chia sẻ về Giúp Việc</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f5f5f5;
+}
+
+header{
+    background:#fff;
+    padding:20px;
+    text-align:center;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+header a{
+    margin:0 15px;
+    text-decoration:none;
+    color:#007c91;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.container{
+    width:95%;
+    margin:auto;
+    padding:30px 0;
+}
+
+.posts{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:25px;
+}
+
+.card h2{
+    color:#007c91;
+    font-size:28px;
+}
+
+.card p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+.btn{
+    padding:12px 22px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    margin-top:10px;
+}
+
+.read-btn{
+    background:#007c91;
+    color:#fff;
+}
+
+.edit-btn{
+    background:orange;
+    color:#fff;
+}
+
+.delete-btn{
+    background:red;
+    color:#fff;
+}
+
+.admin-btn{
+    position:fixed;
+    left:20px;
+    bottom:20px;
+    background:#111;
+    color:#fff;
+    padding:15px 25px;
+    border-radius:40px;
+    cursor:pointer;
+    z-index:999;
+    font-weight:bold;
+}
+
+.add-btn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#007c91;
+    color:#fff;
+    padding:15px 25px;
+    border-radius:40px;
+    cursor:pointer;
+    z-index:999;
+    display:none;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-content{
+    background:#fff;
+    width:90%;
+    max-width:700px;
+    border-radius:20px;
+    padding:25px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+input, textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+textarea{
+    min-height:150px;
+}
+
+.full-content{
+    display:none;
+    margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html">Trang chủ</a>
+    <a href="blog.html">Giúp việc</a>
+    <a href="blog.html">Chăm trẻ</a>
+    <a href="blog.html">Người già</a>
+    <a href="contact.html">Liên hệ</a>
+</header>
+
+<div class="container">
+    <div class="posts" id="posts"></div>
+</div>
+
+<div class="admin-btn" onclick="openLogin()">🔒 ADMIN</div>
+
+<div class="add-btn" id="addBtn" onclick="openAddModal()">
+➕ Thêm bài viết
+</div>
+
+<!-- LOGIN -->
+<div class="modal" id="loginModal">
+<div class="modal-content">
+<h2>Đăng nhập Admin</h2>
+
+<input type="text" id="user" placeholder="Tên đăng nhập">
+<input type="password" id="pass" placeholder="Mật khẩu">
+
+<button class="btn read-btn" onclick="login()">
+Đăng nhập
+</button>
+</div>
+</div>
+
+<!-- ADD / EDIT -->
+<div class="modal" id="postModal">
+<div class="modal-content">
+
+<h2 id="modalTitle">Thêm bài viết</h2>
+
+<input type="text" id="title" placeholder="Tiêu đề">
+
+<textarea id="description" placeholder="Mô tả ngắn"></textarea>
+
+<textarea id="content" placeholder="Nội dung"></textarea>
+
+<input type="file" id="imageFile">
+
+<button class="btn read-btn" onclick="savePost()">
+Lưu bài viết
+</button>
+
+<button class="btn delete-btn" onclick="closePostModal()">
+Đóng
+</button>
+
+</div>
+</div>
+
+<script>
+
+const SUPABASE_URL = "https://lvfitqrmvrhzghsrwgjg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_TAlUSyp9LeocClAHt-U0Vg_ZU3SSwc1";
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const bucket = "blog-images";
+
+let isAdmin = false;
+let editId = null;
+
+function openLogin(){
+    document.getElementById("loginModal").style.display="flex";
+}
+
+function login(){
+
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+
+    if(u==="admin" && p==="Tuyet123456"){
+
+        isAdmin=true;
+
+        document.getElementById("loginModal").style.display="none";
+
+        document.getElementById("addBtn").style.display="block";
+
+        loadPosts();
+
+        alert("Đăng nhập thành công");
+
+    }else{
+        alert("Sai tài khoản");
+    }
+}
+
+function openAddModal(){
+
+    editId=null;
+
+    document.getElementById("modalTitle").innerText="Thêm bài viết";
+
+    document.getElementById("title").value="";
+    document.getElementById("description").value="";
+    document.getElementById("content").value="";
+    document.getElementById("imageFile").value="";
+
+    document.getElementById("postModal").style.display="flex";
+}
+
+function closePostModal(){
+    document.getElementById("postModal").style.display="none";
+}
+
+async function uploadImage(file){
+
+    const fileName = Date.now() + "-" + file.name;
+
+    const { error } = await supabaseClient.storage
+    .from(bucket)
+    .upload(fileName, file);
+
+    if(error){
+        alert(error.message);
+        return null;
+    }
+
+    return `${SUPABASE_URL}/storage/v1/object/public/${bucket}/${fileName}`;
+}
+
+async function savePost(){
+
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const content = document.getElementById("content").value;
+
+    let image = "";
+
+    const file = document.getElementById("imageFile").files[0];
+
+    if(file){
+        image = await uploadImage(file);
+    }
+
+    if(editId){
+
+        const { error } = await supabaseClient
+        .from("posts")
+        .update({
+            title,
+            description,
+            content,
+            image
+        })
+        .eq("id", editId);
+
+        if(error){
+            alert(error.message);
+            return;
+        }
+
+        alert("Sửa thành công");
+
+    }else{
+
+        const { error } = await supabaseClient
+        .from("posts")
+        .insert([{
+            title,
+            description,
+            content,
+            image
+        }]);
+
+        if(error){
+            alert(error.message);
+            return;
+        }
+
+        alert("Thêm bài viết thành công");
+    }
+
+    closePostModal();
+
+    loadPosts();
+}
+
+async function loadPosts(){
+
+    const { data } = await supabaseClient
+    .from("posts")
+    .select("*")
+    .order("id",{ascending:false});
+
+    const posts = document.getElementById("posts");
+
+    posts.innerHTML="";
+
+    data.forEach(post=>{
+
+        posts.innerHTML += `
+        <div class="card">
+
+            <img src="${post.image}">
+
+            <div class="card-content">
+
+                <h2>${post.title}</h2>
+
+                <p>${post.description}</p>
+
+                <button class="btn read-btn"
+                onclick="toggleContent(${post.id})">
+                Đọc tiếp
+                </button>
+
+                ${
+                    isAdmin ?
+                    `
+                    <button class="btn edit-btn"
+                    onclick='editPost(${JSON.stringify(post)})'>
+                    Sửa
+                    </button>
+
+                    <button class="btn delete-btn"
+                    onclick='deletePost(${post.id})'>
+                    Xóa
+                    </button>
+                    `
+                    : ""
+                }
+
+                <div class="full-content" id="content-${post.id}">
+                    <p>${post.content}</p>
+                </div>
+
+            </div>
+
+        </div>
+        `;
+    });
+}
+
+function toggleContent(id){
+
+    const div = document.getElementById("content-"+id);
+
+    if(div.style.display==="block"){
+        div.style.display="none";
+    }else{
+        div.style.display="block";
+    }
+}
+
+function editPost(post){
+
+    editId=post.id;
+
+    document.getElementById("modalTitle").innerText="Sửa bài viết";
+
+    document.getElementById("title").value=post.title;
+    document.getElementById("description").value=post.description;
+    document.getElementById("content").value=post.content;
+
+    document.getElementById("postModal").style.display="flex";
+}
+
+async function deletePost(id){
+
+    if(!confirm("Xóa bài viết này?")) return;
+
+    const { error } = await supabaseClient
+    .from("posts")
+    .delete()
+    .eq("id",id);
+
+    if(error){
+        alert(error.message);
+        return;
+    }
+
+    loadPosts();
+}
+
+loadPosts();
+
+</script>
+
+</body>
+</html>
