@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Blog Giúp Việc Diên Hồng</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -21,53 +23,24 @@ background:#f5f5f5;
 
 /* HEADER */
 
-.hero{
-height:320px;
-background:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop') center/cover;
-position:relative;
-}
-
-.hero::after{
-content:'';
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.45);
-}
-
-.hero-content{
-position:absolute;
-z-index:2;
-width:100%;
-height:100%;
+header{
+height:300px;
+background:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200') center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
-flex-direction:column;
 color:white;
-text-align:center;
-padding:20px;
+font-size:40px;
+font-weight:bold;
 }
-
-.hero h1{
-font-size:42px;
-margin-bottom:15px;
-}
-
-.hero p{
-font-size:20px;
-max-width:800px;
-line-height:1.6;
-}
-
-/* MENU */
 
 nav{
 background:white;
-padding:18px;
+padding:20px;
 display:flex;
 justify-content:center;
 gap:40px;
-box-shadow:0 2px 10px rgba(0,0,0,.08);
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 position:sticky;
 top:0;
 z-index:999;
@@ -75,38 +48,33 @@ z-index:999;
 
 nav a{
 text-decoration:none;
-font-size:20px;
+color:#007c91;
+font-size:22px;
 font-weight:bold;
-color:#007d91;
 }
 
 /* BLOG */
 
-.container{
-width:95%;
+.blog-grid{
 max-width:1300px;
 margin:40px auto;
-}
-
-.blog-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
 gap:30px;
+padding:20px;
 }
 
 .card{
 background:white;
 border-radius:20px;
 overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-position:relative;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
 .card img{
 width:100%;
-height:260px;
+height:250px;
 object-fit:cover;
-display:block;
 }
 
 .card-content{
@@ -115,28 +83,14 @@ padding:25px;
 
 .card h2{
 font-size:38px;
-color:#007d91;
+color:#007c91;
 margin-bottom:15px;
-line-height:1.4;
 }
 
 .card p{
 font-size:22px;
 line-height:1.7;
-color:#333;
-}
-
-.read-more{
-display:inline-block;
-margin-top:20px;
-background:#007d91;
-color:white;
-padding:14px 25px;
-border-radius:10px;
-text-decoration:none;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
+margin-bottom:20px;
 }
 
 .full-content{
@@ -146,35 +100,49 @@ font-size:20px;
 line-height:1.8;
 }
 
+.read-more{
+display:inline-block;
+padding:12px 25px;
+background:#007c91;
+color:white;
+border-radius:10px;
+cursor:pointer;
+font-size:20px;
+text-decoration:none;
+}
+
 /* ADMIN */
 
 .admin-btn{
 position:fixed;
 left:20px;
 bottom:20px;
-background:#111;
+background:#222;
 color:white;
 padding:14px 25px;
-border-radius:40px;
+border-radius:50px;
 cursor:pointer;
-font-weight:bold;
 z-index:9999;
+font-weight:bold;
 }
 
 .admin-panel{
 position:fixed;
-inset:0;
-background:rgba(0,0,0,.6);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
 display:none;
 align-items:center;
 justify-content:center;
-z-index:10000;
+z-index:99999;
 }
 
 .admin-box{
 background:white;
 width:95%;
-max-width:800px;
+max-width:700px;
 padding:30px;
 border-radius:20px;
 max-height:95vh;
@@ -182,8 +150,9 @@ overflow:auto;
 }
 
 .admin-box h2{
+font-size:35px;
 margin-bottom:20px;
-color:#007d91;
+color:#007c91;
 }
 
 .admin-box input,
@@ -191,39 +160,32 @@ color:#007d91;
 width:100%;
 padding:15px;
 margin-bottom:15px;
+font-size:18px;
 border:1px solid #ccc;
 border-radius:10px;
-font-size:18px;
 }
 
 .admin-box textarea{
-height:150px;
+height:180px;
 resize:none;
 }
 
 .admin-box button{
-background:#007d91;
-color:white;
+padding:15px 30px;
 border:none;
-padding:14px 25px;
 border-radius:10px;
 font-size:18px;
 cursor:pointer;
-font-weight:bold;
+background:#007c91;
+color:white;
 margin-right:10px;
 }
 
-.upload-btn{
-display:none;
-margin-top:15px;
-background:#ff5722 !important;
+.close-btn{
+background:red !important;
 }
 
-.login-box{
-display:flex;
-flex-direction:column;
-gap:15px;
-}
+/* CALL */
 
 .call-btn{
 position:fixed;
@@ -233,49 +195,27 @@ background:red;
 color:white;
 padding:18px 30px;
 border-radius:50px;
-text-decoration:none;
-font-size:24px;
+font-size:22px;
 font-weight:bold;
-box-shadow:0 5px 20px rgba(255,0,0,.4);
+text-decoration:none;
+box-shadow:0 5px 20px rgba(255,0,0,0.4);
 z-index:999;
 }
 
-@media(max-width:768px){
-
-.hero h1{
-font-size:30px;
-}
-
-.hero p{
+.success{
+color:green;
 font-size:18px;
+margin-top:10px;
 }
 
-.card h2{
-font-size:28px;
-}
-
-.card p{
-font-size:18px;
-}
-
-}
 </style>
 </head>
+
 <body>
 
-<!-- HEADER -->
-
-<section class="hero">
-<div class="hero-content">
-<h1>Blog Giúp Việc Diên Hồng</h1>
-
-<p>
-Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội
-</p>
-</div>
-</section>
-
-<!-- MENU -->
+<header>
+Blog Giúp Việc Diên Hồng
+</header>
 
 <nav>
 <a href="#">Trang chủ</a>
@@ -285,17 +225,17 @@ Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội
 <a href="#">Liên hệ</a>
 </nav>
 
-<!-- BLOG -->
-
-<div class="container">
 <div class="blog-grid" id="blogGrid"></div>
-</div>
-
-<!-- ADMIN -->
 
 <div class="admin-btn" onclick="openAdmin()">
-<i class="fa-solid fa-gear"></i> ADMIN
+<i class="fa fa-lock"></i> ADMIN
 </div>
+
+<a href="tel:0343958091" class="call-btn">
+📞 GỌI NGAY
+</a>
+
+<!-- ADMIN -->
 
 <div class="admin-panel" id="adminPanel">
 
@@ -305,41 +245,39 @@ Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội
 
 <h2>Đăng nhập quản trị</h2>
 
-<div class="login-box">
 <input type="text" id="user" placeholder="Tên đăng nhập">
+
 <input type="password" id="pass" placeholder="Mật khẩu">
 
 <button onclick="login()">Đăng nhập</button>
-<button onclick="closeAdmin()">Đóng</button>
-</div>
+
+<button class="close-btn" onclick="closeAdmin()">Đóng</button>
 
 </div>
 
-<div id="editor" style="display:none">
+<div id="editor" style="display:none;">
 
-<h2>Thêm bài viết mới</h2>
+<h2>Đăng bài viết</h2>
 
 <input type="text" id="title" placeholder="Tiêu đề bài viết">
 
 <textarea id="desc" placeholder="Mô tả ngắn"></textarea>
 
-<textarea id="content" placeholder="Nội dung đầy đủ"></textarea>
+<textarea id="content" placeholder="Nội dung chi tiết"></textarea>
 
 <input type="file" id="imageFile">
 
 <button onclick="addPost()">Đăng bài</button>
 
-<button onclick="closeAdmin()">Đóng</button>
+<button class="close-btn" onclick="closeAdmin()">Đóng</button>
+
+<div class="success" id="successMsg"></div>
 
 </div>
 
 </div>
 
 </div>
-
-<a class="call-btn" href="tel:0343958091">
-📞 GỌI NGAY
-</a>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -360,23 +298,18 @@ SUPABASE_KEY
 
 /* POSTS */
 
-let posts = JSON.parse(localStorage.getItem('blog_posts')) || [
+let posts = JSON.parse(localStorage.getItem('online_posts')) || [
 
 {
 title:'5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội',
-desc:'Nên chọn người có kinh nghiệm, lý lịch rõ ràng và có trung tâm bảo đảm.',
-content:'Người giúp việc cần có kinh nghiệm, thái độ tốt và trung tâm bảo đảm rõ ràng.',
-image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
-},
-
-{
-title:'Cách chăm sóc người già tại nhà tốt nhất',
-desc:'Người lớn tuổi cần được chăm sóc đúng chế độ ăn uống và nghỉ ngơi.',
-content:'Người già nên được theo dõi sức khỏe thường xuyên và chăm sóc tinh thần.',
-image:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop'
+desc:'Nên chọn người có kinh nghiệm và lý lịch rõ ràng.',
+content:'Giúp việc uy tín cần có kinh nghiệm thực tế, thái độ tốt và được trung tâm bảo đảm.',
+image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200'
 }
 
 ]
+
+renderPosts()
 
 /* RENDER */
 
@@ -384,7 +317,7 @@ function renderPosts(){
 
 const grid = document.getElementById('blogGrid')
 
-grid.innerHTML = ''
+grid.innerHTML=''
 
 posts.forEach((post,index)=>{
 
@@ -418,7 +351,7 @@ ${post.content}
 
 }
 
-/* TOGGLE */
+/* READ MORE */
 
 function toggleContent(index){
 
@@ -454,17 +387,18 @@ document.getElementById('adminPanel').style.display='none'
 
 function login(){
 
-const u = document.getElementById('user').value
-const p = document.getElementById('pass').value
+const u=document.getElementById('user').value
+const p=document.getElementById('pass').value
 
 if(u==='admin' && p==='Tuyet123456'){
 
 document.getElementById('loginForm').style.display='none'
+
 document.getElementById('editor').style.display='block'
 
 }else{
 
-alert('Sai tài khoản hoặc mật khẩu')
+alert('Sai tài khoản')
 
 }
 
@@ -474,20 +408,20 @@ alert('Sai tài khoản hoặc mật khẩu')
 
 async function addPost(){
 
-const title = document.getElementById('title').value
-const desc = document.getElementById('desc').value
-const content = document.getElementById('content').value
-const file = document.getElementById('imageFile').files[0]
+const title=document.getElementById('title').value
+const desc=document.getElementById('desc').value
+const content=document.getElementById('content').value
+const file=document.getElementById('imageFile').files[0]
 
 if(!title || !desc || !content || !file){
 
-alert('Vui lòng nhập đầy đủ')
+alert('Nhập đầy đủ thông tin')
 
 return
 
 }
 
-const fileName = Date.now() + '-' + file.name
+const fileName=Date.now()+'-'+file.name
 
 /* UPLOAD */
 
@@ -497,30 +431,41 @@ const { error } = await supabaseClient.storage
 
 if(error){
 
-alert('Upload ảnh lỗi')
-
 console.log(error)
+
+alert('Upload ảnh lỗi')
 
 return
 
 }
 
-/* GET URL */
+/* URL */
 
-const imageUrl = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${fileName}`
+const { data } = supabaseClient.storage
+.from(BUCKET)
+.getPublicUrl(fileName)
+
+const imageUrl = data.publicUrl
+
+/* SAVE */
 
 posts.unshift({
+
 title,
 desc,
 content,
 image:imageUrl
+
 })
 
-localStorage.setItem('blog_posts',JSON.stringify(posts))
+localStorage.setItem(
+'online_posts',
+JSON.stringify(posts)
+)
 
 renderPosts()
 
-alert('Đăng bài thành công')
+document.getElementById('successMsg').innerHTML='Đăng bài thành công'
 
 document.getElementById('title').value=''
 document.getElementById('desc').value=''
@@ -529,7 +474,7 @@ document.getElementById('imageFile').value=''
 
 }
 
-/* START */
+/* AUTO LOAD */
 
 renderPosts()
 
