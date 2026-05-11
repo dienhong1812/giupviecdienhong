@@ -426,7 +426,7 @@ Z
 
 <!-- ADMIN -->
 
-<button onclick="toggleAdmin()" style="
+<button onclick="openAdmin()" style="
 position:fixed;
 left:20px;
 bottom:20px;
@@ -437,57 +437,57 @@ border:none;
 border-radius:50px;
 font-weight:bold;
 cursor:pointer;
-z-index:9999;
-box-shadow:0 5px 15px rgba(0,0,0,0.3);
+z-index:99999;
 ">
 
 ⚙️ ADMIN
 
 </button>
 
-<div id="adminBox" style="
+<!-- LOGIN -->
+
+<div id="loginBox" style="
 display:none;
 position:fixed;
-left:20px;
-bottom:80px;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 background:white;
-padding:20px;
-border-radius:18px;
-width:320px;
-z-index:9999;
-box-shadow:0 10px 30px rgba(0,0,0,0.2);
+padding:30px;
+border-radius:20px;
+width:340px;
+max-width:90%;
+z-index:999999;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
 ">
 
-<h3 style="
-margin-bottom:15px;
+<h2 style="
+text-align:center;
+margin-bottom:20px;
 color:#007b8f;
 ">
 
 🔐 Đăng nhập quản trị
 
-</h3>
+</h2>
 
-<input
-type="text"
-id="adminUser"
+<input type="text" id="user"
 placeholder="Tên đăng nhập"
 
 style="
 width:100%;
-padding:12px;
-margin-bottom:12px;
+padding:14px;
+margin-bottom:15px;
 border:1px solid #ddd;
 border-radius:10px;
 ">
 
-<input
-type="password"
-id="adminPass"
+<input type="password" id="pass"
 placeholder="Mật khẩu"
 
 style="
 width:100%;
-padding:12px;
+padding:14px;
 margin-bottom:15px;
 border:1px solid #ddd;
 border-radius:10px;
@@ -495,7 +495,7 @@ border-radius:10px;
 
 <button onclick="loginAdmin()" style="
 width:100%;
-padding:14px;
+padding:15px;
 background:#007b8f;
 color:white;
 border:none;
@@ -508,57 +508,90 @@ cursor:pointer;
 
 </button>
 
-<p id="adminMsg" style="
-margin-top:10px;
-color:red;
+<p id="msg" style="
+margin-top:12px;
 text-align:center;
 font-weight:bold;
+color:red;
 "></p>
+
+</div>
+
+<!-- TOOLBAR -->
+
+<div id="toolbar" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+right:0;
+background:#111;
+padding:10px;
+z-index:999999;
+text-align:center;
+">
+
+<button onclick="document.execCommand('bold')">B</button>
+
+<button onclick="document.execCommand('italic')">I</button>
+
+<button onclick="document.execCommand('insertUnorderedList')">• List</button>
+
+<button onclick="savePage()">💾 Lưu</button>
+
+<button onclick="exitEdit()">❌ Thoát</button>
 
 </div>
 
 <script>
 
-function toggleAdmin(){
+function openAdmin(){
 
-let box=document.getElementById("adminBox");
-
-if(box.style.display==="block"){
-
-box.style.display="none";
-
-}else{
-
-box.style.display="block";
-
-}
+document.getElementById("loginBox").style.display="block";
 
 }
 
 function loginAdmin(){
 
-let user=document.getElementById("adminUser").value;
+let u=document.getElementById("user").value;
 
-let pass=document.getElementById("adminPass").value;
+let p=document.getElementById("pass").value;
 
-if(user==="admin" && pass==="Tuyet123456"){
+if(u==="admin" && p==="Tuyet123456"){
 
-document.getElementById("adminMsg").innerHTML=
-"✅ Đăng nhập thành công";
+document.getElementById("msg").innerHTML="✅ Thành công";
 
-alert("Đăng nhập thành công!");
+document.getElementById("loginBox").style.display="none";
 
-window.open(
-"https://github.com/dienhong1812/giupviecdienhong",
-"_blank"
-);
+document.getElementById("toolbar").style.display="block";
+
+document.body.contentEditable=true;
+
+document.getElementById("toolbar").contentEditable=false;
+
+alert("Bạn có thể sửa trực tiếp trên website");
 
 }else{
 
-document.getElementById("adminMsg").innerHTML=
-"❌ Sai tài khoản hoặc mật khẩu";
+document.getElementById("msg").innerHTML="❌ Sai tài khoản";
 
 }
+
+}
+
+function savePage(){
+
+alert("Đã lưu tạm trên trình duyệt.\n\nSau khi sửa xong hãy copy code blog.html và upload lên GitHub.");
+
+}
+
+function exitEdit(){
+
+document.body.contentEditable=false;
+
+document.getElementById("toolbar").style.display="none";
+
+alert("Đã thoát chế độ chỉnh sửa");
 
 }
 
