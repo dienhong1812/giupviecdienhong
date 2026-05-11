@@ -1,434 +1,214 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- NÚT ADMIN -->
 
-<title>Blog Giúp Việc | Trung tâm giúp việc Diên Hồng</title>
-
-<meta name="description" content="Blog chia sẻ kinh nghiệm giúp việc, chăm trẻ, chăm người già tại Hà Nội.">
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap&subset=vietnamese" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Roboto,Arial;
-background:#f4f6f9;
-color:#333;
-line-height:1.6;
-}
-
-/* HEADER */
-
-header{
-height:420px;
-background:
-linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
-url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600');
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:20px;
+<button onclick="openLogin()" style="
+position:fixed;
+left:20px;
+bottom:20px;
+background:#222;
 color:white;
-}
-
-header h1{
-font-size:52px;
-margin-bottom:15px;
-animation:fadeIn 1s ease;
-}
-
-header p{
-font-size:22px;
-animation:fadeIn 2s ease;
-}
-
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* MENU */
-
-nav{
-background:white;
-padding:15px;
-text-align:center;
-position:sticky;
-top:0;
-z-index:999;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-}
-
-nav a{
-margin:0 15px;
-text-decoration:none;
-color:#007b8f;
-font-weight:700;
-}
-
-/* BLOG */
-
-.blog-container{
-max-width:1200px;
-margin:auto;
-padding:40px 20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-}
-
-.post{
-background:white;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-transition:0.3s;
-}
-
-.post:hover{
-transform:translateY(-8px);
-}
-
-.post img{
-width:100%;
-height:230px;
-object-fit:cover;
-}
-
-.post-content{
-padding:22px;
-}
-
-.post h2{
-color:#007b8f;
-margin-bottom:15px;
-font-size:25px;
-}
-
-.post p{
-margin-bottom:15px;
-}
-
-.post a{
-display:inline-block;
 padding:12px 20px;
-background:red;
-color:white;
-text-decoration:none;
-border-radius:8px;
+border:none;
+border-radius:50px;
 font-weight:bold;
-}
+cursor:pointer;
+z-index:9999;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+">
 
-/* FORM */
+⚙️ ADMIN
 
-.form-box{
-max-width:750px;
-margin:60px auto;
+</button>
+
+<!-- FORM LOGIN -->
+
+<div id="adminLogin" style="
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 background:white;
 padding:35px;
 border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,0.08);
-position:relative;
-overflow:hidden;
-}
+width:360px;
+max-width:90%;
+z-index:10000;
+box-shadow:0 10px 35px rgba(0,0,0,0.3);
+">
 
-.form-box::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:6px;
-background:linear-gradient(90deg,#007b8f,#00bcd4);
-}
-
-.form-box h2{
+<h2 style="
 text-align:center;
-font-size:36px;
-margin-bottom:10px;
+margin-bottom:25px;
 color:#007b8f;
-}
+">
 
-.form-box p{
-text-align:center;
-margin-bottom:30px;
-color:#666;
-}
+🔐 Đăng nhập quản trị
 
-.form-group{
-margin-bottom:18px;
-}
+</h2>
 
-.form-group label{
-display:block;
-margin-bottom:8px;
-font-weight:bold;
-}
+<input
+type="text"
+id="username"
+placeholder="Tên đăng nhập"
 
-.form-group input,
-.form-group textarea,
-.form-group select{
+style="
 width:100%;
-padding:15px;
+padding:14px;
+margin-bottom:15px;
 border:1px solid #ddd;
 border-radius:12px;
 font-size:16px;
-}
+">
 
-.form-group textarea{
-height:140px;
-resize:none;
-}
+<input
+type="password"
+id="password"
+placeholder="Mật khẩu"
 
-.form-box button{
+style="
 width:100%;
-padding:16px;
+padding:14px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+">
+
+<button onclick="loginAdmin()" style="
+width:100%;
+padding:15px;
 background:linear-gradient(90deg,#007b8f,#00bcd4);
 color:white;
 border:none;
 border-radius:12px;
-font-size:18px;
+font-size:17px;
 font-weight:bold;
 cursor:pointer;
-}
+">
 
-/* FOOTER */
-
-footer{
-background:#007b8f;
-color:white;
-text-align:center;
-padding:30px;
-margin-top:50px;
-}
-
-/* HOTLINE */
-
-.hotline{
-position:fixed;
-right:20px;
-bottom:20px;
-background:red;
-color:white;
-padding:15px 22px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 20px rgba(0,0,0,0.3);
-animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-header{
-height:320px;
-}
-
-header h1{
-font-size:34px;
-}
-
-header p{
-font-size:18px;
-}
-
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div>
-
-<h1>BLOG GIÚP VIỆC DIÊN HỒNG</h1>
-
-<p>
-Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội
-</p>
-
-</div>
-
-</header>
-
-<nav>
-
-<a href="index.html">Trang chủ</a>
-<a href="#">Giúp việc</a>
-<a href="#">Chăm trẻ</a>
-<a href="#">Người già</a>
-<a href="#">Liên hệ</a>
-
-</nav>
-
-<!-- BLOG -->
-
-<div class="blog-container">
-
-<div class="post">
-
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3">
-
-<div class="post-content">
-
-<h2>5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội</h2>
-
-<p>
-Nên chọn người có kinh nghiệm, lý lịch rõ ràng và được trung tâm hỗ trợ đổi người miễn phí...
-</p>
-
-<a href="#">Xem bài viết</a>
-
-</div>
-
-</div>
-
-<div class="post">
-
-<img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef">
-
-<div class="post-content">
-
-<h2>Cách chăm sóc người già tại nhà tốt nhất</h2>
-
-<p>
-Người lớn tuổi cần được chăm sóc đúng chế độ dinh dưỡng và nghỉ ngơi hợp lý...
-</p>
-
-<a href="#">Xem bài viết</a>
-
-</div>
-
-</div>
-
-<div class="post">
-
-<img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74">
-
-<div class="post-content">
-
-<h2>Nên thuê giúp việc theo giờ hay ăn ở lại?</h2>
-
-<p>
-Mỗi hình thức giúp việc sẽ phù hợp với nhu cầu khác nhau của từng gia đình...
-</p>
-
-<a href="#">Xem bài viết</a>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- FORM -->
-
-<div class="form-box">
-
-<h2>📋 Đăng ký tư vấn giúp việc</h2>
-
-<p>
-Điền thông tin để được hỗ trợ nhanh chóng trong ngày
-</p>
-
-<form action="https://formsubmit.co/dienhong1812@gmail.com" method="POST">
-
-<input type="hidden" name="_captcha" value="false">
-
-<input type="hidden" name="_subject" value="Khách đăng ký từ Blog">
-
-<div class="form-group">
-
-<label>Họ và tên</label>
-
-<input type="text" name="name" placeholder="Nhập họ tên..." required>
-
-</div>
-
-<div class="form-group">
-
-<label>Số điện thoại</label>
-
-<input type="tel" name="phone" placeholder="Nhập số điện thoại..." required>
-
-</div>
-
-<div class="form-group">
-
-<label>Dịch vụ cần hỗ trợ</label>
-
-<select name="service">
-
-<option>Giúp việc nhà</option>
-<option>Chăm trẻ</option>
-<option>Chăm người già</option>
-<option>Giúp việc theo giờ</option>
-<option>Giúp việc ăn ở lại</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Nội dung cần hỗ trợ</label>
-
-<textarea name="message" placeholder="Mô tả nhu cầu của bạn..."></textarea>
-
-</div>
-
-<button type="submit">
-
-🚀 GỬI YÊU CẦU NGAY
+ĐĂNG NHẬP
 
 </button>
 
-</form>
+<p id="loginMsg" style="
+margin-top:15px;
+text-align:center;
+color:red;
+font-weight:bold;
+"></p>
+
+<button onclick="closeLogin()" style="
+margin-top:15px;
+width:100%;
+padding:12px;
+background:#eee;
+border:none;
+border-radius:10px;
+cursor:pointer;
+">
+
+Đóng
+
+</button>
 
 </div>
 
-<footer>
+<!-- NÚT LƯU -->
 
-© 2026 Trung tâm giúp việc Diên Hồng
+<button id="saveBtn" onclick="saveContent()" style="
+display:none;
+position:fixed;
+left:20px;
+bottom:80px;
+background:red;
+color:white;
+padding:14px 20px;
+border:none;
+border-radius:50px;
+font-weight:bold;
+cursor:pointer;
+z-index:9999;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+">
 
-<br><br>
+💾 LƯU NỘI DUNG
 
-📞 Hotline: 0343 958 091
+</button>
 
-</footer>
+<script>
 
-<a href="tel:0343958091" class="hotline">
+/* MỞ LOGIN */
 
-📞 GỌI NGAY
+function openLogin(){
 
-</a>
+document.getElementById("adminLogin").style.display="block";
 
-</body>
-</html>
+}
+
+/* ĐÓNG LOGIN */
+
+function closeLogin(){
+
+document.getElementById("adminLogin").style.display="none";
+
+}
+
+/* ĐĂNG NHẬP */
+
+function loginAdmin(){
+
+let user=document.getElementById("username").value;
+
+let pass=document.getElementById("password").value;
+
+if(user==="admin" && pass==="Tuyet123456"){
+
+alert("Đăng nhập thành công!");
+
+document.getElementById("adminLogin").style.display="none";
+
+/* CHO PHÉP SỬA */
+
+document.body.contentEditable=true;
+
+document.body.style.outline="4px dashed red";
+
+/* HIỆN NÚT LƯU */
+
+document.getElementById("saveBtn").style.display="block";
+
+alert("Bạn có thể sửa trực tiếp nội dung trên website");
+
+}else{
+
+document.getElementById("loginMsg").innerHTML="Sai tài khoản hoặc mật khẩu";
+
+}
+
+}
+
+/* LƯU */
+
+function saveContent(){
+
+localStorage.setItem("websiteContent",document.body.innerHTML);
+
+alert("Đã lưu nội dung trên trình duyệt");
+
+}
+
+/* LOAD */
+
+window.onload=function(){
+
+let saved=localStorage.getItem("websiteContent");
+
+if(saved){
+
+document.body.innerHTML=saved;
+
+}
+
+}
+
+</script>
