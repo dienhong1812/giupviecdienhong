@@ -1,279 +1,51 @@
+# blog.html hoàn chỉnh
+
+```html
 <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Blog Giúp Việc Diên Hồng</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-font-family:Roboto,sans-serif;
-background:#f4f6f9;
-color:#222;
-}
-
-header{
-height:240px;
-background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200') center/cover;
-position:relative;
-}
-
-header::after{
-content:"";
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.45);
-}
-
-.header-content{
-position:relative;
-z-index:2;
-text-align:center;
-padding-top:80px;
-color:white;
-}
-
-.header-content h1{
-font-size:42px;
-margin-bottom:10px;
-}
-
-.header-content p{
-font-size:20px;
-}
-
-nav{
-background:white;
-padding:18px;
-text-align:center;
-box-shadow:0 2px 10px rgba(0,0,0,0.08);
-position:sticky;
-top:0;
-z-index:999;
-}
-
-nav a{
-margin:0 18px;
-text-decoration:none;
-font-weight:700;
-color:#007b8f;
-font-size:18px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:30px 20px;
-}
-
-.blog-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-}
-
-.blog-card{
-background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 5px 20px rgba(0,0,0,0.08);
-position:relative;
-}
-
-.blog-card img{
-width:100%;
-height:250px;
-object-fit:cover;
-display:block;
-}
-
-.blog-content{
-padding:25px;
-}
-
-.blog-content h2{
-font-size:24px;
-color:#007b8f;
-margin-bottom:15px;
-line-height:1.5;
-}
-
-.blog-content p{
-font-size:17px;
-line-height:1.8;
-margin-bottom:15px;
-}
-
-.full-content{
-display:none;
-margin-top:15px;
-}
-
-.readmore{
-background:#007b8f;
-color:white;
-border:none;
-padding:12px 25px;
-border-radius:10px;
-cursor:pointer;
-font-size:16px;
-font-weight:700;
-margin-top:10px;
-}
-
-.edit-btn,
-.save-btn,
-.delete-btn{
-display:none;
-margin-top:10px;
-padding:10px 18px;
-border:none;
-border-radius:10px;
-cursor:pointer;
-font-weight:700;
-color:white;
-}
-
-.edit-btn{
-background:#ff9800;
-}
-
-.save-btn{
-background:#28a745;
-}
-
-.delete-btn{
-background:red;
-}
-
-.upload-box{
-display:none;
-margin-top:15px;
-}
-
-.upload-box input{
-width:100%;
-padding:10px;
-}
-
-.admin-btn{
-position:fixed;
-left:20px;
-bottom:20px;
-background:#111;
-color:white;
-border:none;
-padding:15px 25px;
-border-radius:50px;
-cursor:pointer;
-font-size:18px;
-font-weight:700;
-z-index:9999;
-}
-
-.add-post-btn{
-display:none;
-position:fixed;
-left:20px;
-bottom:90px;
-background:#007b8f;
-color:white;
-border:none;
-padding:15px 25px;
-border-radius:50px;
-cursor:pointer;
-font-size:18px;
-font-weight:700;
-z-index:9999;
-}
-
-.login-box{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-background:white;
-padding:30px;
-border-radius:20px;
-width:350px;
-display:none;
-z-index:99999;
-box-shadow:0 10px 40px rgba(0,0,0,0.2);
-}
-
-.login-box h2{
-margin-bottom:20px;
-color:#007b8f;
-}
-
-.login-box input{
-width:100%;
-padding:15px;
-margin-bottom:15px;
-border:1px solid #ddd;
-border-radius:10px;
-font-size:16px;
-}
-
-.login-box button{
-width:100%;
-padding:15px;
-background:#007b8f;
-color:white;
-border:none;
-border-radius:10px;
-font-size:17px;
-font-weight:700;
-cursor:pointer;
-}
-
-.call-btn{
-position:fixed;
-right:20px;
-bottom:20px;
-background:red;
-color:white;
-padding:18px 30px;
-border-radius:60px;
-font-size:22px;
-font-weight:bold;
-text-decoration:none;
-z-index:9999;
-box-shadow:0 0 25px rgba(255,0,0,0.5);
-animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-
-@media(max-width:768px){
-
-.header-content h1{
-font-size:30px;
-}
-
-.blog-content h2{
-font-size:20px;
-}
-
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Roboto,sans-serif;background:#f4f6f9;color:#222}
+header{height:230px;background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600') center/cover;position:relative}
+header:after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.header-content{position:relative;z-index:2;text-align:center;padding-top:75px;color:#fff}
+.header-content h1{font-size:42px;margin-bottom:10px}
+.header-content p{font-size:20px}
+nav{background:#fff;padding:16px;text-align:center;position:sticky;top:0;z-index:999;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+nav a{text-decoration:none;color:#007b8f;margin:0 15px;font-weight:700}
+.container{max-width:1200px;margin:auto;padding:30px 20px}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px}
+.blog-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+.blog-card img{width:100%;height:240px;object-fit:cover;display:block}
+.blog-content{padding:22px}
+.blog-content h2{font-size:24px;color:#007b8f;margin-bottom:15px}
+.blog-content p{line-height:1.8;font-size:17px;margin-bottom:15px}
+.full-content{display:none;margin-top:10px}
+.readmore,.save-btn,.delete-btn,.edit-btn{border:none;padding:11px 18px;border-radius:10px;font-weight:700;cursor:pointer;color:#fff;margin-top:10px}
+.readmore{background:#007b8f}
+.save-btn{background:#28a745;display:none}
+.delete-btn{background:red;display:none}
+.edit-btn{background:#ff9800;display:none}
+.upload-box{display:none;margin-top:15px}
+.upload-box input{width:100%}
+.admin-btn,.add-post-btn{position:fixed;left:20px;color:#fff;border:none;border-radius:50px;padding:15px 24px;font-weight:700;cursor:pointer;z-index:9999}
+.admin-btn{bottom:20px;background:#111}
+.add-post-btn{bottom:90px;background:#007b8f;display:none}
+.call-btn{position:fixed;right:20px;bottom:20px;background:red;color:#fff;text-decoration:none;padding:18px 28px;border-radius:50px;font-size:22px;font-weight:700;z-index:9999}
+.login-box{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:99999}
+.login-content{background:#fff;padding:30px;border-radius:20px;width:90%;max-width:380px}
+.login-content h2{margin-bottom:20px;color:#007b8f}
+.login-content input{width:100%;padding:14px;margin-bottom:15px;border:1px solid #ddd;border-radius:10px}
+.login-content button{width:100%;padding:15px;background:#007b8f;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer}
+@media(max-width:768px){.header-content h1{font-size:30px}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -292,280 +64,153 @@ font-size:20px;
 </nav>
 
 <div class="container">
-
-<div class="blog-grid" id="blogGrid">
-
-<!-- BÀI VIẾT -->
-<div class="blog-card">
-
-<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200">
-
-<div class="blog-content">
-
-<h2 contenteditable="false">
-5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội
-</h2>
-
-<p contenteditable="false">
-Nên chọn người có kinh nghiệm, lý lịch rõ ràng và có trung tâm bảo đảm.
-</p>
-
-<div class="full-content">
-<p contenteditable="false">
-Khi thuê giúp việc nên ưu tiên người có giấy tờ rõ ràng, đã từng làm việc lâu năm và có đánh giá tốt. Ngoài ra cần ký hợp đồng rõ ràng để đảm bảo quyền lợi hai bên.
-</p>
+<div class="blog-grid" id="blogGrid"></div>
 </div>
 
-<button class="readmore">
-Đọc tiếp
-</button>
-
-<br>
-
-<button class="edit-btn">
-Sửa bài
-</button>
-
-<button class="save-btn">
-Lưu bài
-</button>
-
-<button class="delete-btn">
-Xóa bài
-</button>
-
-<div class="upload-box">
-<input type="file" accept="image/*">
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-<button class="admin-btn" onclick="openLogin()">
-⚙ ADMIN
-</button>
-
-<button class="add-post-btn" onclick="addPost()">
-➕ Thêm bài viết
-</button>
+<button class="admin-btn" onclick="openLogin()">⚙ ADMIN</button>
+<button class="add-post-btn" id="addBtn" onclick="addPost()">➕ Thêm bài viết</button>
 
 <div class="login-box" id="loginBox">
-
+<div class="login-content">
 <h2>Đăng nhập quản trị</h2>
-
 <input type="text" id="username" placeholder="Tên đăng nhập">
-
 <input type="password" id="password" placeholder="Mật khẩu">
-
-<button onclick="loginAdmin()">
-Đăng nhập
-</button>
-
+<button onclick="loginAdmin()">Đăng nhập</button>
+</div>
 </div>
 
-<a href="tel:0343958091" class="call-btn">
-📞 GỌI NGAY
-</a>
+<a href="tel:0343958091" class="call-btn">📞 GỌI NGAY</a>
 
 <script>
 
+let isAdmin=false;
+
+let posts = JSON.parse(localStorage.getItem('dienhong_posts')) || [
+{
+image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200',
+title:'5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội',
+desc:'Nên chọn người có kinh nghiệm, lý lịch rõ ràng và có trung tâm bảo đảm.',
+full:'Khi thuê giúp việc nên ưu tiên người có giấy tờ rõ ràng, đã từng làm việc lâu năm và có đánh giá tốt.'
+}
+];
+
+function savePosts(){
+localStorage.setItem('dienhong_posts',JSON.stringify(posts));
+}
+
+function renderPosts(){
+
+const grid=document.getElementById('blogGrid');
+grid.innerHTML='';
+
+posts.forEach((post,index)=>{
+
+grid.innerHTML += `
+<div class="blog-card">
+<img src="${post.image}">
+<div class="blog-content">
+<h2 ${isAdmin?'contenteditable="true"':''} oninput="updateField(${index},'title',this.innerText)">${post.title}</h2>
+<p ${isAdmin?'contenteditable="true"':''} oninput="updateField(${index},'desc',this.innerText)">${post.desc}</p>
+<div class="full-content" id="full-${index}">
+<p ${isAdmin?'contenteditable="true"':''} oninput="updateField(${index},'full',this.innerText)">${post.full}</p>
+</div>
+<button class="readmore" onclick="toggleRead(${index},this)">Đọc tiếp</button>
+
+${isAdmin ? `
+<br>
+<button class="save-btn" style="display:inline-block" onclick="saveAll()">Lưu bài</button>
+<button class="delete-btn" style="display:inline-block" onclick="deletePost(${index})">Xóa bài</button>
+<div class="upload-box" style="display:block">
+<input type="file" accept="image/*" onchange="changeImage(event,${index})">
+</div>
+` : ''}
+
+</div>
+</div>
+`;
+
+});
+}
+
+function toggleRead(index,btn){
+const full=document.getElementById('full-'+index);
+if(full.style.display==='block'){
+full.style.display='none';
+btn.innerText='Đọc tiếp';
+}else{
+full.style.display='block';
+btn.innerText='Thu gọn';
+}
+}
+
 function openLogin(){
-document.getElementById("loginBox").style.display="block";
+document.getElementById('loginBox').style.display='flex';
 }
 
 function loginAdmin(){
+const user=document.getElementById('username').value;
+const pass=document.getElementById('password').value;
 
-const user=document.getElementById("username").value;
-const pass=document.getElementById("password").value;
-
-if(user==="admin" && pass==="Tuyet123456"){
-
-alert("Đăng nhập thành công");
-
-document.getElementById("loginBox").style.display="none";
-
-enableAdmin();
-
+if(user==='admin' && pass==='Tuyet123456'){
+isAdmin=true;
+document.getElementById('loginBox').style.display='none';
+document.getElementById('addBtn').style.display='block';
+alert('Đăng nhập thành công');
+renderPosts();
 }else{
-
-alert("Sai tài khoản hoặc mật khẩu");
-
+alert('Sai tài khoản hoặc mật khẩu');
+}
 }
 
+function updateField(index,key,value){
+posts[index][key]=value;
 }
 
-function enableAdmin(){
-
-document.querySelector(".add-post-btn").style.display="block";
-
-document.querySelectorAll(".edit-btn").forEach(btn=>{
-btn.style.display="inline-block";
-});
-
-document.querySelectorAll(".save-btn").forEach(btn=>{
-btn.style.display="inline-block";
-});
-
-document.querySelectorAll(".delete-btn").forEach(btn=>{
-btn.style.display="inline-block";
-});
-
-document.querySelectorAll(".upload-box").forEach(box=>{
-box.style.display="block";
-});
-
-document.querySelectorAll("[contenteditable]").forEach(el=>{
-el.contentEditable="true";
-el.style.border="2px dashed red";
-el.style.padding="5px";
-});
-
-setupUpload();
-
-setupDelete();
-
+function saveAll(){
+savePosts();
+alert('Đã lưu bài viết');
 }
 
-function setupUpload(){
+function deletePost(index){
+if(confirm('Xóa bài viết này?')){
+posts.splice(index,1);
+savePosts();
+renderPosts();
+}
+}
 
-document.querySelectorAll(".upload-box input").forEach((input)=>{
+function addPost(){
+posts.unshift({
+image:'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200',
+title:'Tiêu đề bài viết mới',
+desc:'Mô tả ngắn bài viết...',
+full:'Nội dung đầy đủ bài viết...'
+});
 
-input.onchange=function(){
+savePosts();
+renderPosts();
+}
 
-const file=this.files[0];
-
-if(file){
+function changeImage(event,index){
+const file=event.target.files[0];
+if(!file) return;
 
 const reader=new FileReader();
 
-reader.onload=(e)=>{
-
-const card=this.closest(".blog-card");
-
-card.querySelector("img").src=e.target.result;
-
-alert("Đã thay ảnh thành công");
-
-};
+reader.onload=function(e){
+posts[index].image=e.target.result;
+savePosts();
+renderPosts();
+alert('Đã thay ảnh thành công');
+}
 
 reader.readAsDataURL(file);
-
 }
 
-};
-
-});
-
-}
-
-function setupDelete(){
-
-document.querySelectorAll(".delete-btn").forEach(btn=>{
-
-btn.onclick=function(){
-
-if(confirm("Xóa bài viết này?")){
-
-this.closest(".blog-card").remove();
-
-}
-
-};
-
-});
-
-}
-
-document.addEventListener("click",function(e){
-
-if(e.target.classList.contains("readmore")){
-
-const card=e.target.closest(".blog-card");
-
-const full=card.querySelector(".full-content");
-
-if(full.style.display==="block"){
-
-full.style.display="none";
-e.target.innerText="Đọc tiếp";
-
-}else{
-
-full.style.display="block";
-e.target.innerText="Thu gọn";
-
-}
-
-}
-
-});
-
-function addPost(){
-
-const html=`
-
-<div class="blog-card">
-
-<img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200">
-
-<div class="blog-content">
-
-<h2 contenteditable="true">
-Tiêu đề bài viết mới
-</h2>
-
-<p contenteditable="true">
-Mô tả ngắn bài viết...
-</p>
-
-<div class="full-content">
-<p contenteditable="true">
-Nội dung đầy đủ bài viết...
-</p>
-</div>
-
-<button class="readmore">
-Đọc tiếp
-</button>
-
-<br>
-
-<button class="edit-btn" style="display:inline-block;">
-Sửa bài
-</button>
-
-<button class="save-btn" style="display:inline-block;">
-Lưu bài
-</button>
-
-<button class="delete-btn" style="display:inline-block;">
-Xóa bài
-</button>
-
-<div class="upload-box" style="display:block;">
-<input type="file" accept="image/*">
-</div>
-
-</div>
-</div>
-
-`;
-
-document.getElementById("blogGrid").insertAdjacentHTML("beforeend",html);
-
-setupUpload();
-setupDelete();
-
-alert("Đã thêm bài viết mới");
-
-}
-
-setupUpload();
+renderPosts();
 
 </script>
 
 </body>
 </html>
+```
