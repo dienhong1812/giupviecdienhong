@@ -6,14 +6,15 @@
 
 <title>Blog Giúp Việc Diên Hồng</title>
 
-<meta name="description" content="Blog chia sẻ kinh nghiệm giúp việc, chăm trẻ, chăm người già tại Hà Nội.">
+<meta name="description" content="Blog chia sẻ kinh nghiệm giúp việc, chăm trẻ, chăm người già tại Hà Nội">
 <meta name="keywords" content="giúp việc Hà Nội, chăm trẻ, chăm người già">
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap&subset=vietnamese" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -22,12 +23,14 @@ box-sizing:border-box;
 
 body{
 font-family:Roboto;
-background:#f5f7fa;
+background:#f4f7fb;
 color:#222;
 }
 
+/* HEADER */
+
 header{
-height:350px;
+height:320px;
 background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600') center/cover;
 position:relative;
 display:flex;
@@ -40,7 +43,7 @@ header::after{
 content:"";
 position:absolute;
 inset:0;
-background:rgba(0,0,0,.5);
+background:rgba(0,0,0,.55);
 }
 
 .header-content{
@@ -51,12 +54,14 @@ color:#fff;
 
 .header-content h1{
 font-size:42px;
-margin-bottom:10px;
+margin-bottom:15px;
 }
 
 .header-content p{
 font-size:20px;
 }
+
+/* NAV */
 
 nav{
 background:#fff;
@@ -74,24 +79,26 @@ nav a{
 text-decoration:none;
 color:#007b8f;
 font-weight:700;
+font-size:18px;
 }
+
+/* BLOG */
 
 .container{
 width:95%;
 max-width:1300px;
 margin:40px auto;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
 gap:30px;
 }
 
 .post{
 background:#fff;
-border-radius:20px;
+border-radius:22px;
 overflow:hidden;
 box-shadow:0 10px 30px rgba(0,0,0,.08);
 transition:.3s;
-position:relative;
 }
 
 .post:hover{
@@ -102,6 +109,7 @@ transform:translateY(-8px);
 width:100%;
 height:260px;
 object-fit:cover;
+background:#eee;
 }
 
 .post-content{
@@ -109,25 +117,25 @@ padding:25px;
 }
 
 .post h2{
-font-size:34px;
+font-size:36px;
 color:#007b8f;
 margin-bottom:15px;
+line-height:1.3;
 }
 
 .post p{
-line-height:1.7;
-font-size:18px;
+line-height:1.8;
+font-size:19px;
 }
 
-.readmore{
-margin-top:20px;
+.read-btn{
 display:inline-block;
+margin-top:20px;
 background:#007b8f;
 color:#fff;
 padding:12px 24px;
 border-radius:10px;
-text-decoration:none;
-font-weight:700;
+font-weight:bold;
 cursor:pointer;
 }
 
@@ -136,17 +144,19 @@ display:none;
 margin-top:15px;
 }
 
+/* ADMIN */
+
 .admin-btn{
 position:fixed;
-bottom:20px;
 left:20px;
+bottom:20px;
 background:#222;
 color:#fff;
 padding:15px 25px;
 border-radius:50px;
-cursor:pointer;
-z-index:9999;
 font-weight:bold;
+cursor:pointer;
+z-index:99999;
 }
 
 .login-box{
@@ -156,7 +166,7 @@ background:rgba(0,0,0,.7);
 display:none;
 align-items:center;
 justify-content:center;
-z-index:99999;
+z-index:999999;
 }
 
 .login-content{
@@ -174,10 +184,10 @@ color:#007b8f;
 
 .login-content input{
 width:100%;
-padding:14px;
+padding:15px;
 margin-bottom:15px;
-border:1px solid #ddd;
 border-radius:10px;
+border:1px solid #ccc;
 font-size:16px;
 }
 
@@ -187,57 +197,74 @@ padding:15px;
 border:none;
 background:#007b8f;
 color:#fff;
-border-radius:10px;
-font-size:16px;
 font-weight:bold;
+border-radius:10px;
+font-size:17px;
 cursor:pointer;
 }
 
-.edit-tools{
+/* EDIT */
+
+.edit-box{
 display:none;
-padding:15px;
-border-top:1px solid #eee;
-background:#fafafa;
+margin-top:20px;
+padding-top:20px;
+border-top:1px solid #ddd;
 }
 
-.edit-tools textarea{
+.edit-box textarea{
 width:100%;
-height:120px;
-padding:10px;
-border-radius:10px;
-margin-top:10px;
+height:150px;
+padding:15px;
+border-radius:12px;
 border:1px solid #ccc;
+font-size:16px;
+margin-top:15px;
 }
 
-.edit-tools input[type=file]{
-margin-top:10px;
+.edit-box input[type=file]{
+margin-top:15px;
 }
 
 .save-btn{
-margin-top:10px;
+margin-top:15px;
 background:red;
 color:#fff;
+padding:14px 24px;
 border:none;
-padding:12px 20px;
-border-radius:10px;
-cursor:pointer;
+border-radius:12px;
 font-weight:bold;
+cursor:pointer;
+font-size:16px;
 }
+
+/* CALL */
 
 .call{
 position:fixed;
 right:20px;
-bottom:30px;
+bottom:20px;
 background:red;
-color:white;
-padding:18px 28px;
+color:#fff;
+padding:18px 30px;
 border-radius:50px;
-font-size:22px;
 font-weight:bold;
+font-size:22px;
 text-decoration:none;
+box-shadow:0 10px 25px rgba(255,0,0,.4);
 z-index:999;
-box-shadow:0 10px 20px rgba(255,0,0,.4);
+animation:pulse 1.5s infinite;
 }
+
+@keyframes pulse{
+
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+
+}
+
+/* MOBILE */
 
 @media(max-width:768px){
 
@@ -246,43 +273,61 @@ font-size:28px;
 }
 
 .post h2{
-font-size:26px;
+font-size:28px;
 }
 
 .container{
 grid-template-columns:1fr;
 }
 
+nav{
+gap:20px;
+flex-wrap:wrap;
 }
+
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="header-content">
+
 <h1>Blog Giúp Việc Diên Hồng</h1>
-<p>Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội</p>
+
+<p>
+Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội
+</p>
+
 </div>
+
 </header>
 
 <nav>
+
 <a href="#">Trang chủ</a>
 <a href="#">Giúp việc</a>
 <a href="#">Chăm trẻ</a>
 <a href="#">Người già</a>
 <a href="#">Liên hệ</a>
+
 </nav>
 
-<div class="container" id="blogContainer">
+<div class="container">
+
+<!-- POST -->
 
 <div class="post">
 
-<img id="img1" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200">
+<img id="img1"
+src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200">
 
 <div class="post-content">
 
-<h2 contenteditable="false" id="title1">
+<h2 id="title1">
 5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội
 </h2>
 
@@ -291,25 +336,32 @@ Nên chọn người có kinh nghiệm, lý lịch rõ ràng và có trung tâm 
 </p>
 
 <div class="full-content" id="full1">
+
 <p>
-Khi thuê giúp việc, gia đình nên ưu tiên những người đã từng làm việc lâu năm, có giấy tờ đầy đủ và được trung tâm xác minh nhân thân rõ ràng. Điều này giúp đảm bảo an toàn và chất lượng công việc.
+Khi thuê giúp việc, gia đình nên ưu tiên người có kinh nghiệm lâu năm,
+có giấy tờ rõ ràng và được trung tâm xác minh nhân thân.
 </p>
+
 </div>
 
-<div class="readmore" onclick="toggleRead('full1')">
+<div class="read-btn"
+onclick="toggleRead('full1',this)">
 Đọc tiếp
 </div>
 
-</div>
+<!-- EDIT -->
 
-<div class="edit-tools">
+<div class="edit-box" id="editBox1">
 
-<input type="file" onchange="uploadImage(event,'img1')">
+<input type="file"
+onchange="uploadImage(event,'img1')">
 
-<textarea id="edit1"></textarea>
+<textarea id="editText1"
+placeholder="Nhập nội dung bài viết..."></textarea>
 
-<button class="save-btn" onclick="savePost('title1','short1','edit1')">
-LƯU BÀI
+<button class="save-btn"
+onclick="savePost()">
+💾 LƯU BÀI VIẾT
 </button>
 
 </div>
@@ -318,59 +370,94 @@ LƯU BÀI
 
 </div>
 
-<a href="tel:0343958091" class="call">
-📞 GỌI NGAY
-</a>
+</div>
 
-<div class="admin-btn" onclick="openLogin()">
+<!-- ADMIN -->
+
+<div class="admin-btn"
+onclick="openLogin()">
 ⚙ ADMIN
 </div>
 
-<div class="login-box" id="loginBox">
+<div class="login-box"
+id="loginBox">
 
 <div class="login-content">
 
 <h2>Đăng nhập quản trị</h2>
 
-<input type="text" id="user" placeholder="Tên đăng nhập">
+<input type="text"
+id="username"
+placeholder="Tên đăng nhập">
 
-<input type="password" id="pass" placeholder="Mật khẩu">
+<input type="password"
+id="password"
+placeholder="Mật khẩu">
 
-<button onclick="loginAdmin()">ĐĂNG NHẬP</button>
+<button onclick="loginAdmin()">
+ĐĂNG NHẬP
+</button>
 
 </div>
 
 </div>
+
+<!-- CALL -->
+
+<a href="tel:0343958091"
+class="call">
+📞 GỌI NGAY
+</a>
 
 <script>
 
-const SUPABASE_URL = "https://lvfitqrmvrhzghsrwgjg.supabase.co";
+/* SUPABASE */
 
-const SUPABASE_KEY = "sb_publishable_TAlUSyp9LeocClAHt-U0Vg_ZU3SSwc1";
+const SUPABASE_URL =
+"https://lvfitqrmvrhzghsrwgjg.supabase.co";
 
-const supabaseClient = supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const SUPABASE_KEY =
+"sb_publishable_TAlUSyp9LeocClAHt-U0Vg_ZU3SSwc1";
 
-function toggleRead(id){
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+/* READ MORE */
+
+function toggleRead(id,btn){
 
 const el=document.getElementById(id);
 
 if(el.style.display==="block"){
+
 el.style.display="none";
+btn.innerText="Đọc tiếp";
+
 }else{
+
 el.style.display="block";
+btn.innerText="Thu gọn";
+
 }
 
 }
+
+/* LOGIN */
 
 function openLogin(){
+
 document.getElementById("loginBox").style.display="flex";
+
 }
 
 function loginAdmin(){
 
-const user=document.getElementById("user").value;
+const user=document.getElementById("username").value;
 
-const pass=document.getElementById("pass").value;
+const pass=document.getElementById("password").value;
 
 if(user==="admin" && pass==="Tuyet123456"){
 
@@ -378,29 +465,33 @@ alert("Đăng nhập thành công");
 
 document.getElementById("loginBox").style.display="none";
 
-document.querySelectorAll(".edit-tools").forEach(el=>{
-el.style.display="block";
-});
+document.getElementById("editBox1").style.display="block";
 
 }else{
 
-alert("Sai thông tin");
+alert("Sai tài khoản hoặc mật khẩu");
 
 }
 
 }
+
+/* UPLOAD IMAGE */
 
 async function uploadImage(event,imgId){
 
 const file=event.target.files[0];
 
-if(!file) return;
+if(!file){
+
+return;
+
+}
 
 const fileName=Date.now()+"_"+file.name;
 
-const {data,error}=await supabaseClient
-.storage
-.from('blog-images')
+const { data, error } =
+await supabaseClient.storage
+.from("blog-images")
 .upload(fileName,file);
 
 if(error){
@@ -413,8 +504,8 @@ return;
 
 }
 
-const imageUrl=
-`${SUPABASE_URL}/storage/v1/object/public/blog-images/${fileName}`;
+const imageUrl =
+`https://lvfitqrmvrhzghsrwgjg.supabase.co/storage/v1/object/public/blog-images/${fileName}`;
 
 document.getElementById(imgId).src=imageUrl;
 
@@ -424,43 +515,65 @@ alert("Upload ảnh thành công");
 
 }
 
-function savePost(titleId,shortId,editId){
+/* SAVE POST */
 
-const title=document.getElementById(titleId).innerText;
+function savePost(){
 
-const short=document.getElementById(shortId).innerText;
+const title =
+document.getElementById("title1").innerText;
 
-const full=document.getElementById(editId).value;
+const short =
+document.getElementById("short1").innerText;
 
-localStorage.setItem(titleId,title);
+const full =
+document.getElementById("editText1").value;
 
-localStorage.setItem(shortId,short);
+localStorage.setItem("title1",title);
 
-localStorage.setItem(editId,full);
+localStorage.setItem("short1",short);
 
-document.getElementById("full1").innerHTML="<p>"+full+"</p>";
+localStorage.setItem("full1",full);
+
+document.getElementById("full1").innerHTML =
+`<p>${full}</p>`;
 
 alert("Đã lưu bài viết");
 
 }
 
+/* LOAD */
+
 window.onload=function(){
 
 if(localStorage.getItem("img1")){
-document.getElementById("img1").src=localStorage.getItem("img1");
+
+document.getElementById("img1").src =
+localStorage.getItem("img1");
+
 }
 
 if(localStorage.getItem("title1")){
-document.getElementById("title1").innerText=localStorage.getItem("title1");
+
+document.getElementById("title1").innerText =
+localStorage.getItem("title1");
+
 }
 
 if(localStorage.getItem("short1")){
-document.getElementById("short1").innerText=localStorage.getItem("short1");
+
+document.getElementById("short1").innerText =
+localStorage.getItem("short1");
+
 }
 
-if(localStorage.getItem("edit1")){
-document.getElementById("full1").innerHTML="<p>"+localStorage.getItem("edit1")+"</p>";
-document.getElementById("edit1").value=localStorage.getItem("edit1");
+if(localStorage.getItem("full1")){
+
+document.getElementById("full1").innerHTML =
+`<p>${localStorage.getItem("full1")}</p>`;
+
+document.getElementById("editText1").value =
+localStorage.getItem("full1");
+
 }
 
 }
