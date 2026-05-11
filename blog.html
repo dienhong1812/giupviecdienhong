@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -22,7 +23,7 @@ color:#222;
 }
 
 header{
-height:220px;
+height:240px;
 background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200') center/cover;
 position:relative;
 }
@@ -38,12 +39,12 @@ background:rgba(0,0,0,0.45);
 position:relative;
 z-index:2;
 text-align:center;
-padding-top:70px;
+padding-top:80px;
 color:white;
 }
 
 .header-content h1{
-font-size:40px;
+font-size:42px;
 margin-bottom:10px;
 }
 
@@ -101,7 +102,7 @@ padding:25px;
 }
 
 .blog-content h2{
-font-size:22px;
+font-size:24px;
 color:#007b8f;
 margin-bottom:15px;
 line-height:1.5;
@@ -113,6 +114,11 @@ line-height:1.8;
 margin-bottom:15px;
 }
 
+.full-content{
+display:none;
+margin-top:15px;
+}
+
 .readmore{
 background:#007b8f;
 color:white;
@@ -122,37 +128,32 @@ border-radius:10px;
 cursor:pointer;
 font-size:16px;
 font-weight:700;
+margin-top:10px;
 }
 
-.full-content{
+.edit-btn,
+.save-btn,
+.delete-btn{
 display:none;
-margin-top:15px;
-line-height:1.9;
+margin-top:10px;
+padding:10px 18px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+color:white;
 }
 
 .edit-btn{
-display:none;
 background:#ff9800;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:10px;
-cursor:pointer;
-margin-top:10px;
-font-weight:700;
 }
 
 .save-btn{
-display:none;
 background:#28a745;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:10px;
-cursor:pointer;
-margin-top:10px;
-font-weight:700;
-margin-left:10px;
+}
+
+.delete-btn{
+background:red;
 }
 
 .upload-box{
@@ -161,7 +162,8 @@ margin-top:15px;
 }
 
 .upload-box input{
-margin-top:10px;
+width:100%;
+padding:10px;
 }
 
 .admin-btn{
@@ -169,6 +171,22 @@ position:fixed;
 left:20px;
 bottom:20px;
 background:#111;
+color:white;
+border:none;
+padding:15px 25px;
+border-radius:50px;
+cursor:pointer;
+font-size:18px;
+font-weight:700;
+z-index:9999;
+}
+
+.add-post-btn{
+display:none;
+position:fixed;
+left:20px;
+bottom:90px;
+background:#007b8f;
 color:white;
 border:none;
 padding:15px 25px;
@@ -252,6 +270,7 @@ font-size:20px;
 }
 
 }
+
 </style>
 </head>
 
@@ -274,32 +293,34 @@ font-size:20px;
 
 <div class="container">
 
-<div class="blog-grid">
+<div class="blog-grid" id="blogGrid">
 
-<!-- BÀI 1 -->
+<!-- BÀI VIẾT -->
 <div class="blog-card">
 
-<img id="img1" src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200">
 
 <div class="blog-content">
 
-<h2 contenteditable="false" id="title1">
+<h2 contenteditable="false">
 5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội
 </h2>
 
-<p contenteditable="false" id="desc1">
+<p contenteditable="false">
 Nên chọn người có kinh nghiệm, lý lịch rõ ràng và có trung tâm bảo đảm.
 </p>
 
-<div class="full-content" id="full1">
-<p contenteditable="false" id="fulltext1">
+<div class="full-content">
+<p contenteditable="false">
 Khi thuê giúp việc nên ưu tiên người có giấy tờ rõ ràng, đã từng làm việc lâu năm và có đánh giá tốt. Ngoài ra cần ký hợp đồng rõ ràng để đảm bảo quyền lợi hai bên.
 </p>
 </div>
 
-<button class="readmore" onclick="toggleContent('full1',this)">
+<button class="readmore">
 Đọc tiếp
 </button>
+
+<br>
 
 <button class="edit-btn">
 Sửa bài
@@ -309,44 +330,8 @@ Sửa bài
 Lưu bài
 </button>
 
-<div class="upload-box">
-<input type="file" accept="image/*">
-</div>
-
-</div>
-</div>
-
-<!-- BÀI 2 -->
-<div class="blog-card">
-
-<img id="img2" src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200">
-
-<div class="blog-content">
-
-<h2 contenteditable="false" id="title2">
-Cách chăm sóc người già tại nhà tốt nhất
-</h2>
-
-<p contenteditable="false" id="desc2">
-Người lớn tuổi cần được chăm sóc đúng chế độ ăn uống và nghỉ ngơi.
-</p>
-
-<div class="full-content" id="full2">
-<p contenteditable="false" id="fulltext2">
-Người chăm sóc cần theo dõi sức khỏe thường xuyên, hỗ trợ đi lại và chuẩn bị bữa ăn phù hợp để người già luôn khỏe mạnh.
-</p>
-</div>
-
-<button class="readmore" onclick="toggleContent('full2',this)">
-Đọc tiếp
-</button>
-
-<button class="edit-btn">
-Sửa bài
-</button>
-
-<button class="save-btn">
-Lưu bài
+<button class="delete-btn">
+Xóa bài
 </button>
 
 <div class="upload-box">
@@ -361,6 +346,10 @@ Lưu bài
 
 <button class="admin-btn" onclick="openLogin()">
 ⚙ ADMIN
+</button>
+
+<button class="add-post-btn" onclick="addPost()">
+➕ Thêm bài viết
 </button>
 
 <div class="login-box" id="loginBox">
@@ -383,20 +372,6 @@ Lưu bài
 
 <script>
 
-function toggleContent(id,btn){
-
-const content=document.getElementById(id);
-
-if(content.style.display==="block"){
-content.style.display="none";
-btn.innerText="Đọc tiếp";
-}else{
-content.style.display="block";
-btn.innerText="Thu gọn";
-}
-
-}
-
 function openLogin(){
 document.getElementById("loginBox").style.display="block";
 }
@@ -412,7 +387,7 @@ alert("Đăng nhập thành công");
 
 document.getElementById("loginBox").style.display="none";
 
-enableEdit();
+enableAdmin();
 
 }else{
 
@@ -422,13 +397,19 @@ alert("Sai tài khoản hoặc mật khẩu");
 
 }
 
-function enableEdit(){
+function enableAdmin(){
+
+document.querySelector(".add-post-btn").style.display="block";
 
 document.querySelectorAll(".edit-btn").forEach(btn=>{
 btn.style.display="inline-block";
 });
 
 document.querySelectorAll(".save-btn").forEach(btn=>{
+btn.style.display="inline-block";
+});
+
+document.querySelectorAll(".delete-btn").forEach(btn=>{
 btn.style.display="inline-block";
 });
 
@@ -442,21 +423,17 @@ el.style.border="2px dashed red";
 el.style.padding="5px";
 });
 
+setupUpload();
+
+setupDelete();
+
 }
 
-document.querySelectorAll(".save-btn").forEach(btn=>{
+function setupUpload(){
 
-btn.addEventListener("click",()=>{
+document.querySelectorAll(".upload-box input").forEach((input)=>{
 
-alert("Đã lưu nội dung");
-
-});
-
-});
-
-document.querySelectorAll(".upload-box input").forEach((input,index)=>{
-
-input.addEventListener("change",function(){
+input.onchange=function(){
 
 const file=this.files[0];
 
@@ -464,21 +441,129 @@ if(file){
 
 const reader=new FileReader();
 
-reader.onload=function(e){
+reader.onload=(e)=>{
 
-document.querySelectorAll(".blog-card img")[index].src=e.target.result;
+const card=this.closest(".blog-card");
+
+card.querySelector("img").src=e.target.result;
 
 alert("Đã thay ảnh thành công");
 
-}
+};
 
 reader.readAsDataURL(file);
 
 }
 
-});
+};
 
 });
+
+}
+
+function setupDelete(){
+
+document.querySelectorAll(".delete-btn").forEach(btn=>{
+
+btn.onclick=function(){
+
+if(confirm("Xóa bài viết này?")){
+
+this.closest(".blog-card").remove();
+
+}
+
+};
+
+});
+
+}
+
+document.addEventListener("click",function(e){
+
+if(e.target.classList.contains("readmore")){
+
+const card=e.target.closest(".blog-card");
+
+const full=card.querySelector(".full-content");
+
+if(full.style.display==="block"){
+
+full.style.display="none";
+e.target.innerText="Đọc tiếp";
+
+}else{
+
+full.style.display="block";
+e.target.innerText="Thu gọn";
+
+}
+
+}
+
+});
+
+function addPost(){
+
+const html=`
+
+<div class="blog-card">
+
+<img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200">
+
+<div class="blog-content">
+
+<h2 contenteditable="true">
+Tiêu đề bài viết mới
+</h2>
+
+<p contenteditable="true">
+Mô tả ngắn bài viết...
+</p>
+
+<div class="full-content">
+<p contenteditable="true">
+Nội dung đầy đủ bài viết...
+</p>
+</div>
+
+<button class="readmore">
+Đọc tiếp
+</button>
+
+<br>
+
+<button class="edit-btn" style="display:inline-block;">
+Sửa bài
+</button>
+
+<button class="save-btn" style="display:inline-block;">
+Lưu bài
+</button>
+
+<button class="delete-btn" style="display:inline-block;">
+Xóa bài
+</button>
+
+<div class="upload-box" style="display:block;">
+<input type="file" accept="image/*">
+</div>
+
+</div>
+</div>
+
+`;
+
+document.getElementById("blogGrid").insertAdjacentHTML("beforeend",html);
+
+setupUpload();
+setupDelete();
+
+alert("Đã thêm bài viết mới");
+
+}
+
+setupUpload();
 
 </script>
 
