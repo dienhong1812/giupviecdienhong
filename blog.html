@@ -24,14 +24,15 @@ background:#f5f5f5;
 /* HEADER */
 
 header{
-height:300px;
-background:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200') center/cover;
+height:320px;
+background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200') center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
 color:white;
-font-size:40px;
+font-size:45px;
 font-weight:bold;
+text-shadow:0 3px 10px rgba(0,0,0,0.5);
 }
 
 nav{
@@ -73,7 +74,7 @@ box-shadow:0 5px 20px rgba(0,0,0,0.1);
 
 .card img{
 width:100%;
-height:250px;
+height:260px;
 object-fit:cover;
 }
 
@@ -82,13 +83,13 @@ padding:25px;
 }
 
 .card h2{
-font-size:38px;
+font-size:36px;
 color:#007c91;
 margin-bottom:15px;
 }
 
 .card p{
-font-size:22px;
+font-size:21px;
 line-height:1.7;
 margin-bottom:20px;
 }
@@ -107,8 +108,33 @@ background:#007c91;
 color:white;
 border-radius:10px;
 cursor:pointer;
-font-size:20px;
+font-size:18px;
 text-decoration:none;
+margin-top:10px;
+}
+
+.admin-actions{
+margin-top:20px;
+display:none;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.admin-actions button{
+padding:10px 15px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+color:white;
+}
+
+.edit-btn{
+background:#ff9800;
+}
+
+.delete-btn{
+background:red;
 }
 
 /* ADMIN */
@@ -208,6 +234,25 @@ font-size:18px;
 margin-top:10px;
 }
 
+@media(max-width:768px){
+
+header{
+font-size:30px;
+text-align:center;
+padding:20px;
+}
+
+nav{
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card h2{
+font-size:28px;
+}
+
+}
+
 </style>
 </head>
 
@@ -257,17 +302,19 @@ Blog Giúp Việc Diên Hồng
 
 <div id="editor" style="display:none;">
 
-<h2>Đăng bài viết</h2>
+<h2>Thêm / sửa bài viết</h2>
+
+<input type="hidden" id="postId">
 
 <input type="text" id="title" placeholder="Tiêu đề bài viết">
 
-<textarea id="desc" placeholder="Mô tả ngắn"></textarea>
+<textarea id="description" placeholder="Mô tả ngắn"></textarea>
 
 <textarea id="content" placeholder="Nội dung chi tiết"></textarea>
 
 <input type="file" id="imageFile">
 
-<button onclick="addPost()">Đăng bài</button>
+<button onclick="savePost()">Lưu bài viết</button>
 
 <button class="close-btn" onclick="closeAdmin()">Đóng</button>
 
@@ -283,43 +330,50 @@ Blog Giúp Việc Diên Hồng
 
 <script>
 
-/* SUPABASE */
+/* CONFIG */
 
-const SUPABASE_URL = 'https://lvfitqrmvrhzghsrwgjg.supabase.co'
+const SUPABASE_URL='https://lvfitqrmvrhzghsrwgjg.supabase.co'
 
-const SUPABASE_KEY = 'sb_publishable_TAlUSyp9LeocClAHt-U0Vg_ZU3SSwc1'
+const SUPABASE_KEY='sb_publishable_TAlUSyp9LeocClAHt-U0Vg_ZU3SSwc1'
 
-const BUCKET = 'blog-images'
+const BUCKET='blog-images'
 
-const supabaseClient = supabase.createClient(
+const supabaseClient=supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 )
 
-/* POSTS */
+let adminLogged=false
 
-let posts = JSON.parse(localStorage.getItem('online_posts')) || [
+/* LOAD POSTS */
 
-{
-title:'5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội',
-desc:'Nên chọn người có kinh nghiệm và lý lịch rõ ràng.',
-content:'Giúp việc uy tín cần có kinh nghiệm thực tế, thái độ tốt và được trung tâm bảo đảm.',
-image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200'
+async function loadPosts(){
+
+const { data,error } = await supabaseClient
+.from('posts')
+.select('*')
+.order('id',{ascending:false})
+
+if(error){
+
+console.log(error)
+return
+
 }
 
-]
+renderPosts(data)
 
-renderPosts()
+}
 
 /* RENDER */
 
-function renderPosts(){
+function renderPosts(posts){
 
-const grid = document.getElementById('blogGrid')
+const grid=document.getElementById('blogGrid')
 
 grid.innerHTML=''
 
-posts.forEach((post,index)=>{
+posts.forEach(post=>{
 
 grid.innerHTML += `
 
@@ -331,15 +385,32 @@ grid.innerHTML += `
 
 <h2>${post.title}</h2>
 
-<p>${post.desc}</p>
+<p>${post.description}</p>
 
-<div class="full-content" id="full-${index}">
+<div class="full-content" id="full-${post.id}">
 ${post.content}
 </div>
 
-<a class="read-more" onclick="toggleContent(${index})">
+<a class="read-more" onclick="toggleContent(${post.id})">
 Đọc tiếp
 </a>
+
+<div class="admin-actions" id="actions-${post.id}">
+
+<button class="edit-btn" onclick="editPost(
+${post.id},
+\`${post.title}\`,
+\`${post.description}\`,
+\`${post.content}\`
+)">
+Sửa
+</button>
+
+<button class="delete-btn" onclick="deletePost(${post.id})">
+Xóa
+</button>
+
+</div>
 
 </div>
 
@@ -349,13 +420,20 @@ ${post.content}
 
 })
 
+if(adminLogged){
+
+document.querySelectorAll('.admin-actions')
+.forEach(el=>el.style.display='flex')
+
+}
+
 }
 
 /* READ MORE */
 
-function toggleContent(index){
+function toggleContent(id){
 
-const box = document.getElementById('full-'+index)
+const box=document.getElementById('full-'+id)
 
 if(box.style.display==='block'){
 
@@ -392,9 +470,14 @@ const p=document.getElementById('pass').value
 
 if(u==='admin' && p==='Tuyet123456'){
 
+adminLogged=true
+
 document.getElementById('loginForm').style.display='none'
 
 document.getElementById('editor').style.display='block'
+
+document.querySelectorAll('.admin-actions')
+.forEach(el=>el.style.display='flex')
 
 }else{
 
@@ -404,26 +487,27 @@ alert('Sai tài khoản')
 
 }
 
-/* ADD POST */
+/* SAVE POST */
 
-async function addPost(){
+async function savePost(){
+
+const id=document.getElementById('postId').value
 
 const title=document.getElementById('title').value
-const desc=document.getElementById('desc').value
+
+const description=document.getElementById('description').value
+
 const content=document.getElementById('content').value
+
 const file=document.getElementById('imageFile').files[0]
 
-if(!title || !desc || !content || !file){
+let imageUrl=''
 
-alert('Nhập đầy đủ thông tin')
+/* UPLOAD IMAGE */
 
-return
-
-}
+if(file){
 
 const fileName=Date.now()+'-'+file.name
-
-/* UPLOAD */
 
 const { error } = await supabaseClient.storage
 .from(BUCKET)
@@ -431,52 +515,140 @@ const { error } = await supabaseClient.storage
 
 if(error){
 
-console.log(error)
-
 alert('Upload ảnh lỗi')
+
+console.log(error)
 
 return
 
 }
 
-/* URL */
-
 const { data } = supabaseClient.storage
 .from(BUCKET)
 .getPublicUrl(fileName)
 
-const imageUrl = data.publicUrl
-
-/* SAVE */
-
-posts.unshift({
-
-title,
-desc,
-content,
-image:imageUrl
-
-})
-
-localStorage.setItem(
-'online_posts',
-JSON.stringify(posts)
-)
-
-renderPosts()
-
-document.getElementById('successMsg').innerHTML='Đăng bài thành công'
-
-document.getElementById('title').value=''
-document.getElementById('desc').value=''
-document.getElementById('content').value=''
-document.getElementById('imageFile').value=''
+imageUrl=data.publicUrl
 
 }
 
-/* AUTO LOAD */
+/* UPDATE */
 
-renderPosts()
+if(id){
+
+const updateData={
+title,
+description,
+content
+}
+
+if(imageUrl){
+
+updateData.image=imageUrl
+
+}
+
+const { error } = await supabaseClient
+.from('posts')
+.update(updateData)
+.eq('id',id)
+
+if(error){
+
+console.log(error)
+
+alert('Sửa thất bại')
+
+return
+
+}
+
+document.getElementById('successMsg').innerHTML='Sửa bài thành công'
+
+}else{
+
+/* INSERT */
+
+const { error } = await supabaseClient
+.from('posts')
+.insert([{
+title,
+description,
+content,
+image:imageUrl
+}])
+
+if(error){
+
+console.log(error)
+
+alert('Đăng bài lỗi')
+
+return
+
+}
+
+document.getElementById('successMsg').innerHTML='Đăng bài thành công'
+
+}
+
+/* RESET */
+
+document.getElementById('postId').value=''
+document.getElementById('title').value=''
+document.getElementById('description').value=''
+document.getElementById('content').value=''
+document.getElementById('imageFile').value=''
+
+loadPosts()
+
+}
+
+/* EDIT */
+
+function editPost(id,title,description,content){
+
+openAdmin()
+
+document.getElementById('loginForm').style.display='none'
+
+document.getElementById('editor').style.display='block'
+
+document.getElementById('postId').value=id
+
+document.getElementById('title').value=title
+
+document.getElementById('description').value=description
+
+document.getElementById('content').value=content
+
+}
+
+/* DELETE */
+
+async function deletePost(id){
+
+if(!confirm('Xóa bài viết?')) return
+
+const { error } = await supabaseClient
+.from('posts')
+.delete()
+.eq('id',id)
+
+if(error){
+
+alert('Xóa thất bại')
+
+return
+
+}
+
+loadPosts()
+
+}
+
+/* START */
+
+loadPosts()
 
 </script>
 
