@@ -1,56 +1,281 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Blog Giúp Việc Diên Hồng</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Roboto,sans-serif;background:#f4f6f9;color:#222}
-header{height:230px;background:url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600') center/cover;position:relative}
-header:after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5)}
-.header-content{position:relative;z-index:2;text-align:center;padding-top:75px;color:#fff}
-.header-content h1{font-size:42px;margin-bottom:10px}
-.header-content p{font-size:20px}
-nav{background:#fff;padding:16px;text-align:center;position:sticky;top:0;z-index:999;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-nav a{text-decoration:none;color:#007b8f;margin:0 15px;font-weight:700}
-.container{max-width:1200px;margin:auto;padding:30px 20px}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:25px}
-.blog-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.08)}
-.blog-card img{width:100%;height:240px;object-fit:cover;display:block}
-.blog-content{padding:22px}
-.blog-content h2{font-size:24px;color:#007b8f;margin-bottom:15px}
-.blog-content p{line-height:1.8;font-size:17px;margin-bottom:15px}
-.full-content{display:none;margin-top:10px}
-.readmore,.save-btn,.delete-btn,.edit-btn{border:none;padding:11px 18px;border-radius:10px;font-weight:700;cursor:pointer;color:#fff;margin-top:10px}
-.readmore{background:#007b8f}
-.save-btn{background:#28a745;display:none}
-.delete-btn{background:red;display:none}
-.edit-btn{background:#ff9800;display:none}
-.upload-box{display:none;margin-top:15px}
-.upload-box input{width:100%}
-.admin-btn,.add-post-btn{position:fixed;left:20px;color:#fff;border:none;border-radius:50px;padding:15px 24px;font-weight:700;cursor:pointer;z-index:9999}
-.admin-btn{bottom:20px;background:#111}
-.add-post-btn{bottom:90px;background:#007b8f;display:none}
-.call-btn{position:fixed;right:20px;bottom:20px;background:red;color:#fff;text-decoration:none;padding:18px 28px;border-radius:50px;font-size:22px;font-weight:700;z-index:9999}
-.login-box{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:99999}
-.login-content{background:#fff;padding:30px;border-radius:20px;width:90%;max-width:380px}
-.login-content h2{margin-bottom:20px;color:#007b8f}
-.login-content input{width:100%;padding:14px;margin-bottom:15px;border:1px solid #ddd;border-radius:10px}
-.login-content button{width:100%;padding:15px;background:#007b8f;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer}
-@media(max-width:768px){.header-content h1{font-size:30px}}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#f5f5f5;
+}
+
+/* HEADER */
+
+.hero{
+height:320px;
+background:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop') center/cover;
+position:relative;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+}
+
+.hero-content{
+position:absolute;
+z-index:2;
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:20px;
+max-width:800px;
+line-height:1.6;
+}
+
+/* MENU */
+
+nav{
+background:white;
+padding:18px;
+display:flex;
+justify-content:center;
+gap:40px;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:999;
+}
+
+nav a{
+text-decoration:none;
+font-size:20px;
+font-weight:bold;
+color:#007d91;
+}
+
+/* BLOG */
+
+.container{
+width:95%;
+max-width:1300px;
+margin:40px auto;
+}
+
+.blog-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+position:relative;
+}
+
+.card img{
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+}
+
+.card-content{
+padding:25px;
+}
+
+.card h2{
+font-size:38px;
+color:#007d91;
+margin-bottom:15px;
+line-height:1.4;
+}
+
+.card p{
+font-size:22px;
+line-height:1.7;
+color:#333;
+}
+
+.read-more{
+display:inline-block;
+margin-top:20px;
+background:#007d91;
+color:white;
+padding:14px 25px;
+border-radius:10px;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.full-content{
+display:none;
+margin-top:20px;
+font-size:20px;
+line-height:1.8;
+}
+
+/* ADMIN */
+
+.admin-btn{
+position:fixed;
+left:20px;
+bottom:20px;
+background:#111;
+color:white;
+padding:14px 25px;
+border-radius:40px;
+cursor:pointer;
+font-weight:bold;
+z-index:9999;
+}
+
+.admin-panel{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:10000;
+}
+
+.admin-box{
+background:white;
+width:95%;
+max-width:800px;
+padding:30px;
+border-radius:20px;
+max-height:95vh;
+overflow:auto;
+}
+
+.admin-box h2{
+margin-bottom:20px;
+color:#007d91;
+}
+
+.admin-box input,
+.admin-box textarea{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:10px;
+font-size:18px;
+}
+
+.admin-box textarea{
+height:150px;
+resize:none;
+}
+
+.admin-box button{
+background:#007d91;
+color:white;
+border:none;
+padding:14px 25px;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+font-weight:bold;
+margin-right:10px;
+}
+
+.upload-btn{
+display:none;
+margin-top:15px;
+background:#ff5722 !important;
+}
+
+.login-box{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.call-btn{
+position:fixed;
+right:20px;
+bottom:20px;
+background:red;
+color:white;
+padding:18px 30px;
+border-radius:50px;
+text-decoration:none;
+font-size:24px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(255,0,0,.4);
+z-index:999;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:30px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.card h2{
+font-size:28px;
+}
+
+.card p{
+font-size:18px;
+}
+
+}
 </style>
 </head>
 <body>
 
-<header>
-<div class="header-content">
+<!-- HEADER -->
+
+<section class="hero">
+<div class="hero-content">
 <h1>Blog Giúp Việc Diên Hồng</h1>
-<p>Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội</p>
+
+<p>
+Kinh nghiệm giúp việc - chăm trẻ - chăm người già tại Hà Nội
+</p>
 </div>
-</header>
+</section>
+
+<!-- MENU -->
 
 <nav>
 <a href="#">Trang chủ</a>
@@ -60,151 +285,253 @@ nav a{text-decoration:none;color:#007b8f;margin:0 15px;font-weight:700}
 <a href="#">Liên hệ</a>
 </nav>
 
+<!-- BLOG -->
+
 <div class="container">
 <div class="blog-grid" id="blogGrid"></div>
 </div>
 
-<button class="admin-btn" onclick="openLogin()">⚙ ADMIN</button>
-<button class="add-post-btn" id="addBtn" onclick="addPost()">➕ Thêm bài viết</button>
+<!-- ADMIN -->
 
-<div class="login-box" id="loginBox">
-<div class="login-content">
+<div class="admin-btn" onclick="openAdmin()">
+<i class="fa-solid fa-gear"></i> ADMIN
+</div>
+
+<div class="admin-panel" id="adminPanel">
+
+<div class="admin-box">
+
+<div id="loginForm">
+
 <h2>Đăng nhập quản trị</h2>
-<input type="text" id="username" placeholder="Tên đăng nhập">
-<input type="password" id="password" placeholder="Mật khẩu">
-<button onclick="loginAdmin()">Đăng nhập</button>
-</div>
+
+<div class="login-box">
+<input type="text" id="user" placeholder="Tên đăng nhập">
+<input type="password" id="pass" placeholder="Mật khẩu">
+
+<button onclick="login()">Đăng nhập</button>
+<button onclick="closeAdmin()">Đóng</button>
 </div>
 
-<a href="tel:0343958091" class="call-btn">📞 GỌI NGAY</a>
+</div>
+
+<div id="editor" style="display:none">
+
+<h2>Thêm bài viết mới</h2>
+
+<input type="text" id="title" placeholder="Tiêu đề bài viết">
+
+<textarea id="desc" placeholder="Mô tả ngắn"></textarea>
+
+<textarea id="content" placeholder="Nội dung đầy đủ"></textarea>
+
+<input type="file" id="imageFile">
+
+<button onclick="addPost()">Đăng bài</button>
+
+<button onclick="closeAdmin()">Đóng</button>
+
+</div>
+
+</div>
+
+</div>
+
+<a class="call-btn" href="tel:0343958091">
+📞 GỌI NGAY
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-let isAdmin=false;
+/* SUPABASE */
 
-let posts = JSON.parse(localStorage.getItem('dienhong_posts')) || [
+const SUPABASE_URL = 'https://lvfitqrmvrhzghsrwgjg.supabase.co'
+
+const SUPABASE_KEY = 'sb_publishable_TAlUSyp9LeocClAHt-U0Vg_ZU3SSwc1'
+
+const BUCKET = 'blog-images'
+
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+)
+
+/* POSTS */
+
+let posts = JSON.parse(localStorage.getItem('blog_posts')) || [
+
 {
-image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200',
 title:'5 kinh nghiệm thuê giúp việc uy tín tại Hà Nội',
 desc:'Nên chọn người có kinh nghiệm, lý lịch rõ ràng và có trung tâm bảo đảm.',
-full:'Khi thuê giúp việc nên ưu tiên người có giấy tờ rõ ràng, đã từng làm việc lâu năm và có đánh giá tốt.'
-}
-];
+content:'Người giúp việc cần có kinh nghiệm, thái độ tốt và trung tâm bảo đảm rõ ràng.',
+image:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop'
+},
 
-function savePosts(){
-localStorage.setItem('dienhong_posts',JSON.stringify(posts));
+{
+title:'Cách chăm sóc người già tại nhà tốt nhất',
+desc:'Người lớn tuổi cần được chăm sóc đúng chế độ ăn uống và nghỉ ngơi.',
+content:'Người già nên được theo dõi sức khỏe thường xuyên và chăm sóc tinh thần.',
+image:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop'
 }
+
+]
+
+/* RENDER */
 
 function renderPosts(){
 
-const grid=document.getElementById('blogGrid');
-grid.innerHTML='';
+const grid = document.getElementById('blogGrid')
+
+grid.innerHTML = ''
 
 posts.forEach((post,index)=>{
 
 grid.innerHTML += `
-<div class="blog-card">
+
+<div class="card">
+
 <img src="${post.image}">
-<div class="blog-content">
-<h2 ${isAdmin?'contenteditable="true"':''} oninput="updateField(${index},'title',this.innerText)">${post.title}</h2>
-<p ${isAdmin?'contenteditable="true"':''} oninput="updateField(${index},'desc',this.innerText)">${post.desc}</p>
+
+<div class="card-content">
+
+<h2>${post.title}</h2>
+
+<p>${post.desc}</p>
+
 <div class="full-content" id="full-${index}">
-<p ${isAdmin?'contenteditable="true"':''} oninput="updateField(${index},'full',this.innerText)">${post.full}</p>
+${post.content}
 </div>
-<button class="readmore" onclick="toggleRead(${index},this)">Đọc tiếp</button>
 
-${isAdmin ? `
-<br>
-<button class="save-btn" style="display:inline-block" onclick="saveAll()">Lưu bài</button>
-<button class="delete-btn" style="display:inline-block" onclick="deletePost(${index})">Xóa bài</button>
-<div class="upload-box" style="display:block">
-<input type="file" accept="image/*" onchange="changeImage(event,${index})">
-</div>
-` : ''}
+<a class="read-more" onclick="toggleContent(${index})">
+Đọc tiếp
+</a>
 
 </div>
-</div>
-`;
 
-});
+</div>
+
+`
+
+})
+
 }
 
-function toggleRead(index,btn){
-const full=document.getElementById('full-'+index);
-if(full.style.display==='block'){
-full.style.display='none';
-btn.innerText='Đọc tiếp';
+/* TOGGLE */
+
+function toggleContent(index){
+
+const box = document.getElementById('full-'+index)
+
+if(box.style.display==='block'){
+
+box.style.display='none'
+
 }else{
-full.style.display='block';
-btn.innerText='Thu gọn';
-}
-}
 
-function openLogin(){
-document.getElementById('loginBox').style.display='flex';
+box.style.display='block'
+
 }
 
-function loginAdmin(){
-const user=document.getElementById('username').value;
-const pass=document.getElementById('password').value;
+}
 
-if(user==='admin' && pass==='Tuyet123456'){
-isAdmin=true;
-document.getElementById('loginBox').style.display='none';
-document.getElementById('addBtn').style.display='block';
-alert('Đăng nhập thành công');
-renderPosts();
+/* ADMIN */
+
+function openAdmin(){
+
+document.getElementById('adminPanel').style.display='flex'
+
+}
+
+function closeAdmin(){
+
+document.getElementById('adminPanel').style.display='none'
+
+}
+
+/* LOGIN */
+
+function login(){
+
+const u = document.getElementById('user').value
+const p = document.getElementById('pass').value
+
+if(u==='admin' && p==='Tuyet123456'){
+
+document.getElementById('loginForm').style.display='none'
+document.getElementById('editor').style.display='block'
+
 }else{
-alert('Sai tài khoản hoặc mật khẩu');
-}
+
+alert('Sai tài khoản hoặc mật khẩu')
+
 }
 
-function updateField(index,key,value){
-posts[index][key]=value;
 }
 
-function saveAll(){
-savePosts();
-alert('Đã lưu bài viết');
+/* ADD POST */
+
+async function addPost(){
+
+const title = document.getElementById('title').value
+const desc = document.getElementById('desc').value
+const content = document.getElementById('content').value
+const file = document.getElementById('imageFile').files[0]
+
+if(!title || !desc || !content || !file){
+
+alert('Vui lòng nhập đầy đủ')
+
+return
+
 }
 
-function deletePost(index){
-if(confirm('Xóa bài viết này?')){
-posts.splice(index,1);
-savePosts();
-renderPosts();
-}
+const fileName = Date.now() + '-' + file.name
+
+/* UPLOAD */
+
+const { error } = await supabaseClient.storage
+.from(BUCKET)
+.upload(fileName,file)
+
+if(error){
+
+alert('Upload ảnh lỗi')
+
+console.log(error)
+
+return
+
 }
 
-function addPost(){
+/* GET URL */
+
+const imageUrl = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${fileName}`
+
 posts.unshift({
-image:'https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1200',
-title:'Tiêu đề bài viết mới',
-desc:'Mô tả ngắn bài viết...',
-full:'Nội dung đầy đủ bài viết...'
-});
+title,
+desc,
+content,
+image:imageUrl
+})
 
-savePosts();
-renderPosts();
+localStorage.setItem('blog_posts',JSON.stringify(posts))
+
+renderPosts()
+
+alert('Đăng bài thành công')
+
+document.getElementById('title').value=''
+document.getElementById('desc').value=''
+document.getElementById('content').value=''
+document.getElementById('imageFile').value=''
+
 }
 
-function changeImage(event,index){
-const file=event.target.files[0];
-if(!file) return;
+/* START */
 
-const reader=new FileReader();
-
-reader.onload=function(e){
-posts[index].image=e.target.result;
-savePosts();
-renderPosts();
-alert('Đã thay ảnh thành công');
-}
-
-reader.readAsDataURL(file);
-}
-
-renderPosts();
+renderPosts()
 
 </script>
 
